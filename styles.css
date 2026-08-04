@@ -171,6 +171,7 @@ a {
 main {
   position: relative;
   z-index: 1;
+  overflow-x: clip;
   background:
     linear-gradient(90deg, rgba(0, 0, 0, 0.018) 1px, transparent 1px) 0 0 / 56px 56px,
     linear-gradient(0deg, rgba(0, 0, 0, 0.014) 1px, transparent 1px) 0 0 / 56px 56px;
@@ -401,6 +402,7 @@ main {
 .solutions-section {
   padding-inline: clamp(24px, 4vw, 72px);
   scroll-margin-top: 76px;
+  overflow-x: clip;
 }
 
 .product-overview {
@@ -1248,42 +1250,111 @@ pre {
 }
 
 @media (max-width: 700px) {
+  body {
+    overflow-x: hidden;
+  }
+
   .site-header {
     padding-inline: 16px;
+  }
+
+  .brand {
+    gap: 10px;
+    font-size: 16px;
+  }
+
+  .brand-mark {
+    width: 30px;
+    height: 30px;
+  }
+
+  .nav-links,
+  .header-actions {
+    left: 14px;
+    right: 14px;
+  }
+
+  .nav-links {
+    top: 72px;
+    padding: 16px;
+  }
+
+  .header-actions {
+    top: 446px;
+    display: none;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  body.menu-open .header-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .language,
+  .ghost-link,
+  .site-header .pill {
+    width: 100%;
+    justify-content: center;
   }
 
   .hero {
     --hero-pad-x: 20px;
     grid-template-columns: 1fr;
-    min-height: 190vh;
-    padding: 48px 20px 24px;
+    min-height: 178vh;
+    padding: 52px 20px 24px;
   }
 
   .hero-copy {
-    top: 94px;
+    top: 86px;
     align-self: start;
+    width: min(100%, 350px);
   }
 
   .hero h1,
   .section-heading h2 {
-    font-size: 42px;
+    font-size: clamp(38px, 11vw, 44px);
+    line-height: 1.02;
   }
 
   .headline-accent {
-    font-size: 30px;
+    margin: 20px 0 16px;
+    font-size: clamp(26px, 8vw, 32px);
+  }
+
+  .hero .muted {
+    max-width: 320px;
+    font-size: 15px;
+  }
+
+  .button-row {
+    width: 100%;
+    gap: 10px;
+    margin-top: 24px;
+  }
+
+  .hero-copy .button-row {
+    max-width: 320px;
+  }
+
+  .pill {
+    min-height: 44px;
+    padding-inline: 18px;
+    font-size: 13px;
   }
 
   .hero-system {
     top: 0;
-    margin-top: -48px;
+    margin-top: -42px;
     min-height: 100vh;
     height: 100vh;
     overflow: hidden;
   }
 
   .axis-card {
-    top: 58%;
+    top: 55%;
     left: 20px;
+    max-width: calc(100vw - 40px);
   }
 
   .stack-canvas {
@@ -1293,64 +1364,177 @@ pre {
   }
 
   .platform-detail {
-    top: 60%;
-    left: 52%;
-    right: auto;
+    top: auto;
+    left: 20px;
+    right: 20px;
+    bottom: 108px;
+    min-width: 0;
+    max-width: calc(100vw - 40px);
+    transform: translateY(8px);
+  }
+
+  .platform-detail.is-visible {
+    transform: translateY(0);
   }
 
   .stack-caption {
     left: 20px;
-    bottom: 72px;
+    right: 20px;
+    bottom: 64px;
+    font-size: 11px;
+    white-space: normal;
   }
 
   .feature-grid {
     grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .product-overview {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    width: 100%;
+    padding: 34px 20px 52px;
+    overflow-x: clip;
+    background: rgba(255, 253, 250, 0.68);
   }
 
   .overview-card {
-    min-height: 0;
-    padding: 0 20px 24px;
+    width: 100%;
+    min-height: 320px;
+    padding: 0;
   }
 
   .product-platform-visual {
-    margin-inline: -20px;
+    height: 320px;
+    margin-inline: 0;
   }
 
   .product-section-intro {
     align-items: start;
     flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    padding-bottom: 2px;
   }
 
   .product-section-intro p {
+    width: 100%;
+    max-width: 330px;
     text-align: left;
   }
 
-  .overview-card h2 {
-    margin-top: 22px;
+  .card-target {
+    z-index: 6;
   }
 
-  .overview-card > p {
-    min-height: 0;
+  .sr-card-copy {
+    left: 0;
+    top: 0;
   }
 
-  .overview-card ul {
-    margin-top: 24px;
-    padding-top: 22px;
+  .logo-rail {
+    padding-bottom: 54px;
+  }
+
+  .section-heading {
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+
+  .section-heading > span {
+    font-size: 12px;
+  }
+
+  .section-heading p {
+    margin: 0;
+    font-size: 15px;
   }
 
   .api-section,
   .compute-section,
   .agents-section,
   .solutions-section {
-    padding: 58px 20px;
+    padding: 58px 20px 50px;
+  }
+
+  .feature-card {
+    min-height: 0;
+  }
+
+  .feature-card > :first-child {
+    height: 156px;
+  }
+
+  .model-cloud {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .model-cloud span {
+    min-height: 42px;
+  }
+
+  pre {
+    padding: 22px 18px;
+    font-size: 11px;
+  }
+
+  .agent-pills {
+    padding: 32px 14px;
+  }
+
+  .cost-chart {
+    padding: 20px 12px;
+  }
+
+  .compute-carousel,
+  .agent-grid,
+  .solution-grid {
+    gap: 16px;
+  }
+
+  .compute-card {
+    min-height: 0;
+    padding: 26px 22px;
+  }
+
+  .agent-card {
+    min-height: 0;
+  }
+
+  .agent-art {
+    height: 176px;
+  }
+
+  .agent-card small,
+  .agent-card h3,
+  .agent-card p,
+  .agent-card > span {
+    margin-left: 22px;
+    margin-right: 22px;
+  }
+
+  .agent-card p {
+    font-size: 14px;
+  }
+
+  .solution-art {
+    height: 150px;
   }
 
   .pro-banner {
     grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 22px;
+  }
+
+  .pro-banner .pill {
+    width: 100%;
   }
 
   .site-footer {
     padding: 54px 20px;
+    gap: 28px;
   }
 }
 
